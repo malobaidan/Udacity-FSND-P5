@@ -2,8 +2,8 @@
 
 ## Python Files:
 There is two python files:
-* application.py: the primary application which operates a webserver to serve the application
-* database_setup.py: this initializes the database models necessary for communicating with the database
+* application.py: the primary application which operates a webserver to serve the web app
+* database_setup.py: this initializes the database models (tables) necessary for communicating with the database
 
 ### Python Dependencies (libraries):
 
