@@ -26,7 +26,7 @@ write in command prompt (cmd on windows,terminal in linux...etc), e.g. `python3 
 ### Basic info:
 This application has a build in web server that surves a web catalog for car makers and car models the user can authinticate via google account or github account and add,edit or delete their own data.
 
-### API
+### API:
 there is two JSON endpoints:
 * `/model/<id>/JSON`: displays a single car model of id <id>
 * `/carmaker/<id>/JSON`: displays all car models grouped by carmaker
