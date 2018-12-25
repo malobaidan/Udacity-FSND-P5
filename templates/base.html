@@ -11,14 +11,14 @@
   <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
   <title>{% block title %}{% endblock %} - Cars</title>
   {% endblock %}
-  <style type="text/css" scoped>
+  <style>
     body {
       display: flex;
       min-height: 100vh;
       flex-direction: column;
-       
+
     }
-  
+
     main {
       flex: 1 0 auto;
     }
@@ -26,48 +26,49 @@
 </head>
 
 <body>
-    <nav>
-  <div class="nav-wrapper">
+  <nav>
+    <div class="nav-wrapper">
       <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="{{ url_for('Home') }}">Car Makers</a></li>
-          <li><a href="{{ url_for('CategoricalModelList') }}">Models</a></li>
-          <li><a href="{{ url_for('Login') }}">Login</a></li>
-          <li><a href="{{ url_for('Login') }}" onclick="signOut();">Logout</a></li>
-        </ul>
-  </div>
-</nav>
+        <li><a href="{{ url_for('Home') }}">Car Makers</a></li>
+        <li><a href="{{ url_for('CategoricalModelList') }}">Models</a></li>
+        <li><a href="{{ url_for('Login') }}">Login</a></li>
+        <li><a href="{{ url_for('Login') }}" onclick="signOut();">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <div id="content" class="container" style="padding-bottom:2vh">{% block content %}{% endblock %}</div>
-  <div id="footer">
-    {% block footer %}
-    <footer class="page-footer">
-        <div class="container">
-          <div class="row">
-            <div class="col l6 s12">
-              <h5 class="white-text">Misk - Udacity</h5>
-              <p class="grey-text text-lighten-4">Second Project</p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-              <h5 class="white-text">Links</h5>
-              <ul>
-                <li><a class="grey-text text-lighten-3" href="{{ url_for('Home') }}">Home</a></li>
-                <li><a class="grey-text text-lighten-3" href='/carmaker/new'>Create New Carmaker</a></li>
-                <li><a class="grey-text text-lighten-3" href="{{ url_for('CategoricalModelList') }}">Models</a></li>
-                <li><a class="grey-text text-lighten-3" href='/model/new'>Create New Model</a></li>
-              </ul>
-            </div>
-          </div>
+
+  {% block footer %}
+
+  <footer class="page-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Misk - Udacity</h5>
+          <p class="grey-text text-lighten-4">Second Project</p>
         </div>
-        <div class="footer-copyright">
-          <div class="container">
-          By Mohammed Alobaidan
-          <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
-          </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="{{ url_for('Home') }}">Home</a></li>
+            <li><a class="grey-text text-lighten-3" href='/carmaker/new'>Create New Carmaker</a></li>
+            <li><a class="grey-text text-lighten-3" href="{{ url_for('CategoricalModelList') }}">Models</a></li>
+            <li><a class="grey-text text-lighten-3" href='/model/new'>Create New Model</a></li>
+          </ul>
         </div>
-      </footer>
-          
-    {% endblock %}
-  </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        By Mohammed Alobaidan
+        <!-- <a class="grey-text text-lighten-4 right" href="#!">More Links</a> -->
+      </div>
+    </div>
+  </footer>
+
+  {% endblock %}
+
 </body>
 
 </html>

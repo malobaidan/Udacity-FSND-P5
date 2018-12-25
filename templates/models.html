@@ -10,27 +10,38 @@
 </style>
 {% endblock %}
 {% block content %}
-	<div class="list">
+
+<div class="list">
 	{% if id %}
 	<h2>{{ carmaker_name }}</h2>
 	{% else %}
 	<h1>All Models</h1>
 	{% endif %}
 	<div class="collection">
-	{% for model in models %}
-	<a href='/model/{{ model.id }}' class="red-text lighten-2 collection-item">{{ model.name}}</a>
-	{% endfor %}
-</div>
-	</br>
-	<a class="red lighten-2 btn waves-effect waves-light" href='/model/new'>Create New Model</a>
-	
-	{% if id and owner %}
-	</br>
-	<a href='/carmaker/update_{{ id }}'>Update Carmaker</a>
-	</br>
-	<a href='/carmaker/delete_{{ id }}'>Delete Carmaker</a>
-	{% endif %}
+		{% for model in models %}
+		<a href='/model/{{ model.id }}' class="red-text lighten-2 collection-item">{{ model.name}}</a>
+		{% endfor %}
 	</div>
+	<div class="input-field col s12">
+		<select onChange="window.location.href=this.value">
+			<option value="" disabled selected>Choose your option</option>
+			<option value="/model/new">Create New Model</option>
+			{% if id and owner %}
+			<option value="/carmaker/update_{{ id }}">Update Carmaker</option>
+			<option value="/carmaker/delete_{{ id }}">Delete Carmaker</option>
+			{% endif %}
+		</select>
+		<label>Materialize Select</label>
+	</div>
+</div>
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		var elems = document.querySelectorAll('select');
+		options = ('a', 'b	');
+		var instances = M.FormSelect.init(elems, options);
+		console.log(instances[0]);
 
+	});
+</script>
 
 {% endblock %}
