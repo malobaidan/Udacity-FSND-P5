@@ -11,12 +11,17 @@
 {% endblock %}
 {% block content %}
 
-	<div class="model">
+	<div class="model red-text text-lighten-2">
 		<h2>{{ model.name }}</h2>
 
 		<p><i>{{ model.carmaker.name }}</i></p>
-
-		<p>{{ model.information }}</p>
+		<div class="col s12 m5">
+				<div class="card-panel red lighten-2">
+				  <span class="white-text">{{ model.information }}
+				  </span>
+				  </div>
+		</div>
+		
 		{% if owner %}
 		<a href='/model/update_{{ model.id }}'>Update Model</a>
 		<a href='/model/delete_{{ model.id }}'>Delete Model</a>

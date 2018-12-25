@@ -16,12 +16,14 @@
 	{% else %}
 	<h1>All Models</h1>
 	{% endif %}
+	<div class="collection">
 	{% for model in models %}
-	<a href='/model/{{ model.id }}'>{{ model.name}}</a>
-	</br>
+	<a href='/model/{{ model.id }}' class="red-text lighten-2 collection-item">{{ model.name}}</a>
 	{% endfor %}
+</div>
 	</br>
-	<a href='/model/new'>Create New Model</a>
+	<a class="red lighten-2 btn waves-effect waves-light" href='/model/new'>Create New Model</a>
+	
 	{% if id and owner %}
 	</br>
 	<a href='/carmaker/update_{{ id }}'>Update Carmaker</a>

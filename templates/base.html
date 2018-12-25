@@ -16,6 +16,7 @@
       display: flex;
       min-height: 100vh;
       flex-direction: column;
+       
     }
   
     main {
@@ -36,14 +37,14 @@
   </div>
 </nav>
 
-  <div id="content" class="container">{% block content %}{% endblock %}</div>
+  <div id="content" class="container" style="padding-bottom:2vh">{% block content %}{% endblock %}</div>
   <div id="footer">
     {% block footer %}
     <footer class="page-footer">
         <div class="container">
           <div class="row">
             <div class="col l6 s12">
-              <h5 class="white-text">Mist - Udacity</h5>
+              <h5 class="white-text">Misk - Udacity</h5>
               <p class="grey-text text-lighten-4">Second Project</p>
             </div>
             <div class="col l4 offset-l2 s12">

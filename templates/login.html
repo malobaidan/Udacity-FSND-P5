@@ -15,11 +15,11 @@
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-	<div class="flashes">
+<div class="flashes">
 	<ul class="flashes">
-	{% for message in messages %}
+		{% for message in messages %}
 		<li>{{ message }}</li>
-	{% endfor %}
+		{% endfor %}
 	</ul>
 </div>
 {% endif %}
@@ -27,42 +27,43 @@
 
 {% if logged_in == true %}
 <div class="form">
-<p>You are logged in as {{ user }} via {{ provider }}.</p>
+	<p>You are logged in as {{ user }} via {{ provider }}.</p>
 
-<a href="" onclick="signOut();">Click here to sign out of this application.</a>
-<script>
-	function signOut() {
-		var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/logout');
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send('logout');
-	xhr.onload = function() {
-		console.log(xhr.responseText);
-	};
-	{% if provider == 'Google' %}
-	var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function() {
+	<a href="" onclick="signOut();">Click here to sign out of this application.</a>
+	<script>
+		function signOut() {
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '/logout');
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.send('logout');
+			xhr.onload = function () {
+				console.log(xhr.responseText);
+			};
+			{% if provider == 'Google' %}
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function () {
 				console.log('User signed out of Google on this webpage.');
-	})
-		{% endif %}
-	}
-</script>
-
-{% if provider == 'Google' %}
-<script>
-	function init() {
-		gapi.load('auth2', function() {
-			gapi.auth2.init();
+			})
+			{% endif %}
 		}
-	)};
-</script>
-{% endif %}
+	</script>
+
+	{% if provider == 'Google' %}
+	<script>
+		function init() {
+			gapi.load('auth2', function () {
+				gapi.auth2.init();
+			}
+			)
+		};
+	</script>
+	{% endif %}
 </div>
 {% elif logged_in == false %}
 <div class="login-box">
-<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-<script>
+	<script>
 		function onSignIn(googleUser) {
 			// Useful data for your client-side scripts:
 			var profile = googleUser.getBasicProfile();
@@ -78,27 +79,27 @@
 			console.log("ID Token: " + id_token);
 
 			var xhr = new XMLHttpRequest();
-		xhr.open('POST', '/googleoauth');
-		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.onload = function() {
-			console.log('Signed in as: ' + xhr.responseText);
-		};
-		xhr.send('idtoken=' + id_token + '&state={{ state }}');
+			xhr.open('POST', '/googleoauth');
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhr.onload = function () {
+				console.log('Signed in as: ' + xhr.responseText);
+			};
+			xhr.send('idtoken=' + id_token + '&state={{ state }}');
 
-	{% if source_url %}
-	setTimeout(function() {
+			{% if source_url %}
+			setTimeout(function () {
 				window.location.href = "{{ source_url }}";
-			 }, 4000);
-	{% endif %}
+			}, 4000);
+			{% endif %}
 		};
 	</script>
 
 	<a href="https://github.com/login/oauth/authorize?client_id={{ github_client_id }}" class="github-signin">
 		<div>
-		<p>Click here to sign in via <b>GitHub!</b></p>
+			<p>Click here to sign in via <b>GitHub!</b></p>
 		</div>
 	</a>
-{% endif %}
+	{% endif %}
 
-
+</div>
 	{% endblock %}

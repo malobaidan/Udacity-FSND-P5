@@ -11,13 +11,13 @@
 {% endblock %}
 {% block content %}
 <div class="list">
-	<h2>Please select a carmaker to view models in that carmaker</h2>
+	<h2 class="red-text text-lighten-2">Please select a carmaker to view models in that carmaker</h2>
 	<div class="collection">
 		{% for cat in carmakers %}
-		<a href="/carmaker/{{ cat.id }}" class="collection-item">{{ cat.name}}</a>
-		</br>
+		<a href="/carmaker/{{ cat.id }}" class="red-text text-lighten-2 collection-item">{{ cat.name}}</a>
+		
 		{% endfor %}
 	</div>
-	<a class="waves-effect waves-light btn-large" href='/carmaker/new'>Create New Carmaker</a>
+	<a class="red lighten-2 waves-effect waves-light btn-large" href='/carmaker/new'>Create New Carmaker</a>
 </div>
 {% endblock %}
