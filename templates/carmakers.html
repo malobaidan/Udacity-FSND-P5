@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}cars{% endblock %}
+{% block head %}
+{{ super() }}
+
+<style type="text/css">
+	.important {
+		color: #336699;
+	}
+</style>
+{% endblock %}
+{% block content %}
+<div class="list">
+	<h2>Please select a carmaker to view models in that carmaker</h2>
+	<div class="collection">
+		{% for cat in carmakers %}
+		<a href="/carmaker/{{ cat.id }}" class="collection-item">{{ cat.name}}</a>
+		</br>
+		{% endfor %}
+	</div>
+	<a class="waves-effect waves-light btn-large" href='/carmaker/new'>Create New Carmaker</a>
+</div>
+{% endblock %}

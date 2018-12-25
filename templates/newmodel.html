@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}cars{% endblock %}
+{% block head %}
+{{ super() }}
+
+<style type="text/css">
+	.important {
+		color: #336699;
+	}
+</style>
+{% endblock %}
+{% block content %}
+
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    <div class="flashes">
+	    <ul class=flashes>
+	    {% for message in messages %}
+	      <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	    </div>
+	  {% endif %}
+	{% endwith %}
+
+	<div class="form">
+	<form action="{{ url_for('NewModel') }}" method= "POST">
+		<p>Name:</p>
+		<input class="smallbox" type="text" name="name" size='30' required>
+		</br>
+		<p>Information:</p>
+		<input class="bigbox" type="text" name="information" size='80' required>
+		</br>
+		<p>Carmaker:</p>
+		{% for carmaker in carmakers %}
+		<p>
+			<label>
+				<input class="with-gap" name="carmaker" type="radio" value="{{ carmaker.id }}" required />
+				<span>{{ carmaker.name }}</span>
+			</label>
+		</p>
+
+		{% endfor %}
+		</br>
+		<input type="submit" value='Create'>
+	</form>
+	</div>
+	{% endblock %}
