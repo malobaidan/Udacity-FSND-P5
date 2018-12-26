@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, ForeignKey, Integer, String, Text, Date, engine, create_engine
+from sqlalchemy import Column, ForeignKey, Integer
+from sqlalchemy import String, Text, Date, engine, create_engine
 from sqlalchemy.orm import relationship
 
 Base = declarative_base()

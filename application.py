@@ -15,7 +15,6 @@ app = Flask(__name__)
 app.secret_key = 'Super secret key'
 engine = create_engine('sqlite:///models.db', echo=True)
 Session = sessionmaker(bind=engine)
-
 # OAuth variables
 GOOGLE_CLIENT_ID = "1078045580907-7a91vsj3851lecbfm5o9dpb74r5vhtsf\
 .apps.googleusercontent.com"
@@ -57,6 +56,15 @@ def login_required(secure_page):
     return wrapper
 
 
+def loggincheck():
+    if login_session.get('userid') is not None:
+        userusername = login_session.get('username')
+        return userusername
+    else:
+        userusername = None
+        return userusername
+
+
 @app.route('/hello')
 def HelloWorld():
     return "Hello World"
@@ -68,7 +76,8 @@ def Home():
     session = Session()
     carmakers = session.query(Carmaker).order_by(Carmaker.name).all()
     return render_template('carmakers.html',
-                           carmakers=carmakers)
+                           carmakers=carmakers,
+                           userusername=loggincheck())
 
 
 @app.route('/carmaker/<id>')
@@ -89,11 +98,13 @@ def CategoricalModelList(id=None):
         models = session.query(Model).all()
         carmaker_name = None
         owner = False
+    userusername = loggincheck()
     return render_template('models.html',
                            models=models,
                            id=id,
                            carmaker_name=carmaker_name,
-                           owner=owner)
+                           owner=owner,
+                           userusername=userusername)
 
 
 # this method to return json
@@ -115,7 +126,8 @@ def NewCarmaker():
         session.commit()
         return redirect(url_for('Home'))
     else:
-        return render_template('newcarmaker.html')
+        return render_template('newcarmaker.html',
+                               userusername=loggincheck())
 
 
 @app.route('/carmaker/update_<id>', methods=['GET', 'POST'])
@@ -137,7 +149,8 @@ def UpdateCarmaker(id):
         if current_user == carmakerToUpdate.author:
             return render_template('updatecarmaker.html',
                                    name=carmakerToUpdate.name,
-                                   id=id)
+                                   id=id,
+                                   userusername=loggincheck())
         else:
             return abort(403)
 
@@ -160,7 +173,8 @@ def DeleteCarmaker(id):
         if current_user == carmakerToDelete.author:
             return render_template('deletecarmaker.html',
                                    name=carmakerToDelete.name,
-                                   id=id)
+                                   id=id,
+                                   userusername=loggincheck())
         else:
             return abort(403)
 
@@ -195,7 +209,8 @@ def ShowModel(id):
         owner = False
     return render_template('model.html',
                            model=model,
-                           owner=owner)
+                           owner=owner,
+                           userusername=loggincheck())
 
 
 @app.route('/model/<id>/JSON')
@@ -227,7 +242,9 @@ def NewModel():
             'User logged in as {}'.format(login_session['userid'])
         )
         carmakers = session.query(Carmaker).all()
-        return render_template('newmodel.html', carmakers=carmakers)
+        return render_template('newmodel.html',
+                               carmakers=carmakers,
+                               userusername=loggincheck())
 
 
 @app.route('/model/update_<id>', methods=['GET', 'POST'])
@@ -255,7 +272,8 @@ def UpdateModel(id):
                                    information=modelToUpdate.information,
                                    id=id,
                                    carmaker=modelToUpdate.carmaker.name,
-                                   carmakers=carmakers)
+                                   carmakers=carmakers,
+                                   userusername=loggincheck())
         else:
             return abort(403)
 
@@ -278,7 +296,8 @@ def DeleteModel(id):
         if current_user == modelToDelete.author:
             return render_template('deletemodel.html',
                                    name=modelToDelete.name,
-                                   id=id)
+                                   id=id,
+                                   userusername=loggincheck())
         else:
             return abort(403)
 
@@ -298,7 +317,8 @@ def Login():
         return render_template('login.html',
                                logged_in=False,
                                source_url=source_url,
-                               github_client_id=GITHUB_CLIENT_ID)
+                               github_client_id=GITHUB_CLIENT_ID,
+                               userusername=loggincheck())
 
 
 @app.route('/logout', methods=['POST'])
@@ -332,6 +352,7 @@ def GoogleOAuth():
         login_session['username'] = idinfo['name']
         flash("You have successfully logged in via Google as {}"
               .format(idinfo['email']))
+
         return "{} id {}".format(idinfo['email'], login_session['userid'])
     except ValueError:
         # Invalid token

@@ -31,8 +31,12 @@
       <ul id="nav-mobile" class="left hide-on-med-and-down">
         <li><a href="{{ url_for('Home') }}">Car Makers</a></li>
         <li><a href="{{ url_for('CategoricalModelList') }}">Models</a></li>
+        {% if userusername != none %}
+        <li>{{ userusername }}</li>
+        <li><a href="{{ url_for('Login') }}" onclick="signOut();"> Logout</a></li>
+        {% else %}
         <li><a href="{{ url_for('Login') }}">Login</a></li>
-        <li><a href="{{ url_for('Login') }}" onclick="signOut();">Logout</a></li>
+        {% endif %}
       </ul>
     </div>
   </nav>
