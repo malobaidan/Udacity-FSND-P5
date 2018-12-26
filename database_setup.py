@@ -17,7 +17,8 @@ class Model(Base):
     carmaker_id = Column(Integer, ForeignKey('carmaker.id'))
     author = Column(Text)
 
-    carmaker = relationship("Carmaker", back_populates="models")
+    carmaker = relationship(
+        "Carmaker", back_populates="models")
 
 
 class Carmaker(Base):
@@ -28,7 +29,8 @@ class Carmaker(Base):
     name = Column(String)
     author = Column(Text)
 
-    models = relationship("Model", back_populates="carmaker")
+    models = relationship(
+        "Model", back_populates="carmaker", cascade="all, delete")
 
 
 # this will recreate the database tables if it is not present
