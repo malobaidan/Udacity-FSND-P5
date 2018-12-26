@@ -65,11 +65,6 @@ def loggincheck():
         return userusername
 
 
-@app.route('/hello')
-def HelloWorld():
-    return "Hello World"
-
-
 @app.route('/')
 @app.route('/carmakers')
 def Home():
