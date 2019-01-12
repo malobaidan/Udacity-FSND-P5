@@ -8,14 +8,14 @@ SSH Port: 2200
 ### VPS configration:
 follow the following steps: 
 
-### 1:
+### 1: Create grader username:
 - create a username grader by excuting the following command: ```sudo adduser grader```
 - give the grader sudo access with ```usermod -aG sudo grader```
 
-### 2:
+### 2: update server packages:
 - Update and upgrade packages: ```sudo apt update``` then ```sudo apt upgrade``` 
 
-### 3:
+### 3: Change the default SSH port:
 - change the SSH port : ```sudo nano /etc/ssh/sshd_config``` then change port number from 22 to 2200
 - then restart the ssh service by: ```sudo service ssh restart```
 
